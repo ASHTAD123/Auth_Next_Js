@@ -2,13 +2,12 @@ import { connect } from "@/dbconfig/dbconfig";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/userModel";
 import bcrypt from "bcryptjs";
-import { useRouter } from "next/navigation";
+
 
 connect()
 
 export async function POST(request:NextRequest) {
  
-const router = useRouter();
 
   const requestBody = await request.json();
     
@@ -40,7 +39,7 @@ const router = useRouter();
       
        console.log("USER" ,user);
        
-       router.push("/login");
+     return NextResponse.redirect(new URL("/login", request.url));
 
    }else{
       console.log("Password doesn't matched");
